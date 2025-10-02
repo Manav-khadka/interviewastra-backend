@@ -8,6 +8,7 @@ from app.core.dependencies import get_current_user
 from app.services.ai_service import AIService
 from app.services.latex_service import LaTeXService
 import uuid
+from typing import Dict, Any
 
 router = APIRouter()
 
@@ -77,15 +78,93 @@ def delete_resume(resume_id: uuid.UUID, db: Session = Depends(get_db), current_u
 
 @router.post("/{resume_id}/generate-pdf")
 async def generate_pdf(resume_id: uuid.UUID, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    """Generate LaTeX file from resume. PDF compilation will be added later."""
     resume = db.query(Resume).filter(Resume.id == resume_id, Resume.user_id == current_user.id).first()
     if not resume:
         raise HTTPException(status_code=404, detail="Resume not found")
 
     template = db.query(Template).filter(Template.id == resume.template_id).first()
+    if not template:
+        raise HTTPException(status_code=404, detail="Template not found")
+    
+    # Generate LaTeX content
     latex_content = LaTeXService.render_template(template.content, resume.content_json)
-    output_path = f"resumes/{resume_id}.pdf"
-    success = LaTeXService.generate_pdf(latex_content, output_path)
-    if success:
-        return {"pdf_url": output_path}
-    else:
-        raise HTTPException(status_code=500, detail="PDF generation failed")
+    
+    # Save LaTeX file
+    tex_path = f"static/resumes/{resume_id}.tex"
+    try:
+        with open(tex_path, "w", encoding="utf-8") as f:
+            f.write(latex_content)
+        
+        return {
+            "status": "success",
+            "message": "LaTeX file generated successfully",
+            "latex_url": f"/static/resumes/{resume_id}.tex",
+            "note": "PDF compilation will be added once LaTeX is installed locally"
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate LaTeX file: {str(e)}"
+        )
+
+@router.put("/{resume_id}/sections/{section_name}")
+def update_resume_section(resume_id: uuid.UUID, section_name: str, value: Dict[str, Any], db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    resume = db.query(Resume).filter(Resume.id == resume_id, Resume.user_id == current_user.id).first()
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found")
+
+    resume.content_json[section_name] = value
+    db.commit()
+    db.refresh(resume)
+    return {"message": f"Section {section_name} updated"}
+
+@router.post("/{resume_id}/sections/{section_name}/items")
+def add_resume_section_item(resume_id: uuid.UUID, section_name: str, item: Dict[str, Any], db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    resume = db.query(Resume).filter(Resume.id == resume_id, Resume.user_id == current_user.id).first()
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found")
+
+    if section_name not in resume.content_json:
+        resume.content_json[section_name] = []
+    if not isinstance(resume.content_json[section_name], list):
+        raise HTTPException(status_code=400, detail="Section is not a list")
+
+    resume.content_json[section_name].append(item)
+    db.commit()
+    db.refresh(resume)
+    return {"message": f"Item added to section {section_name}"}
+
+@router.put("/{resume_id}/sections/{section_name}/items/{index}")
+def update_resume_section_item(resume_id: uuid.UUID, section_name: str, index: int, item: Dict[str, Any], db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    resume = db.query(Resume).filter(Resume.id == resume_id, Resume.user_id == current_user.id).first()
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found")
+
+    if section_name not in resume.content_json or not isinstance(resume.content_json[section_name], list):
+        raise HTTPException(status_code=400, detail="Section not found or not a list")
+
+    if index < 0 or index >= len(resume.content_json[section_name]):
+        raise HTTPException(status_code=404, detail="Item index out of range")
+
+    resume.content_json[section_name][index] = item
+    db.commit()
+    db.refresh(resume)
+    return {"message": f"Item {index} in section {section_name} updated"}
+
+@router.delete("/{resume_id}/sections/{section_name}/items/{index}")
+def delete_resume_section_item(resume_id: uuid.UUID, section_name: str, index: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    resume = db.query(Resume).filter(Resume.id == resume_id, Resume.user_id == current_user.id).first()
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found")
+
+    if section_name not in resume.content_json or not isinstance(resume.content_json[section_name], list):
+        raise HTTPException(status_code=400, detail="Section not found or not a list")
+
+    if index < 0 or index >= len(resume.content_json[section_name]):
+        raise HTTPException(status_code=404, detail="Item index out of range")
+
+    del resume.content_json[section_name][index]
+    db.commit()
+    db.refresh(resume)
+    return {"message": f"Item {index} in section {section_name} deleted"}

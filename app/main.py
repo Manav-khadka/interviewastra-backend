@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
+from fastapi.staticfiles import StaticFiles
 from app.modules.auth.routes import router as auth_router
 from app.modules.resumes.routes import router as resumes_router
 from app.modules.analysis.routes import router as analysis_router
@@ -37,6 +38,9 @@ app = FastAPI(
 )
 
 app.add_middleware(LoggingMiddleware)
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(resumes_router, prefix="/resumes", tags=["resumes"])

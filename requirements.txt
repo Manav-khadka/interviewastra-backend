@@ -12,3 +12,4 @@ google-generativeai
 jinja2
 loguru
 alembic
+requests

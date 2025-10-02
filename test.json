@@ -1,0 +1,193 @@
+{
+  "ai_enhanced": false,
+  "content_json": {
+    "summary": "Detail-oriented and innovative software engineer with experience in full-stack web development, API design, and data visualization. Adept at collaborating with cross-functional teams to deliver high-quality software solutions. Passionate about learning new technologies and improving coding skills.",
+    "certifications": [
+      {
+        "credential_id": "ABC-123-DEF",
+        "date": "June 2023",
+        "issuer": "Amazon Web Services",
+        "name": "AWS Certified Solutions Architect",
+        "url": "https://aws.amazon.com/certification/"
+      }
+    ],
+    "education": [
+      {
+        "date": "Aug. 2018 -- May 2021",
+        "degree": "Bachelor of Arts in Computer Science, Minor in Business",
+        "details": [],
+        "institution": "Southwestern University",
+        "location": "Georgetown, TX"
+      },
+      {
+        "date": "Aug. 2014 -- May 2018",
+        "degree": "Associate's in Liberal Arts",
+        "details": [],
+        "institution": "Blinn College",
+        "location": "Bryan, TX"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Undergraduate Research Assistant",
+        "date": "June 2020 -- Present",
+        "location": "Texas A&M University",
+        "position": "Research Assistant",
+        "responsibilities": [
+          "Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems",
+          "Developed a full-stack web application using Flask, React, PostgreSQL and Docker to analyze GitHub data",
+          "Explored ways to visualize GitHub collaboration in a classroom setting"
+        ]
+      },
+      {
+        "company": "Information Technology Support Specialist",
+        "date": "Sep. 2018 -- Present",
+        "location": "Southwestern University",
+        "position": "IT Support Specialist",
+        "responsibilities": [
+          "Communicate with managers to set up campus computers used on campus",
+          "Assess and troubleshoot computer problems brought by students, faculty and staff",
+          "Maintain upkeep of computers, classroom equipment, and 200 printers across campus"
+        ]
+      },
+      {
+        "company": "Artificial Intelligence Research Assistant",
+        "date": "May 2019 -- July 2019",
+        "location": "Southwestern University",
+        "position": "AI Research Assistant",
+        "responsibilities": [
+          "Explored methods to generate video game dungeons based on evolutionary algorithms",
+          "Discovered methods to grade dungeons based on key performance indicators"
+        ]
+      }
+    ],
+    "heading": {
+      "additional_links": [
+        {
+          "display_text": "jakery.com",
+          "icon": "faGlobe",
+          "url": "https://jakery.com"
+        }
+      ],
+      "address": "123 Main Street, Anytown, CA 12345",
+      "email": "jake@su.edu",
+      "full_name": "Jake Ryan",
+      "github": {
+        "url": "https://github.com/jake",
+        "username": "jake"
+      },
+      "linkedin": {
+        "url": "https://linkedin.com/in/jake",
+        "username": "jake"
+      },
+      "phone": "123-456-7890"
+    },
+    "leadership": [
+      {
+        "date": "Aug 2020 -- Present",
+        "description": [
+          "Organized weekly tech talks with industry professionals",
+          "Led team of 15 students in hackathon competitions"
+        ],
+        "organization": "Computer Science Club",
+        "role": "President"
+      }
+    ],
+    "projects": [
+      {
+        "date": "June 2020 -- Present",
+        "description": [
+          "Developed a full-stack web application using with Flask serving a REST API with React as the frontend",
+          "Implemented GitHub OAuth to get data from user's repositories",
+          "Visualized GitHub data to show collaboration",
+          "Used Celery and Redis for asynchronous tasks"
+        ],
+        "name": "Gitlytics",
+        "technologies": ["Python", "Flask", "React", "PostgreSQL", "Docker"],
+        "url": "https://github.com/jake/gitlytics"
+      },
+      {
+        "date": "June 2020 -- manav",
+        "description": [
+          "Developed a full-stack web application using with Flask serving a REST API with React as the frontend",
+          "Implemented GitHub OAuth to get data from user's repositories",
+          "Visualized GitHub data to show collaboration",
+          "Used Celery and Redis for asynchronous tasks"
+        ],
+        "name": "Gitlytics",
+        "technologies": ["Python", "Flask", "React", "PostgreSQL", "Docker"],
+        "url": "https://github.com/jake/gitlytics"
+      },
+      {
+        "date": "May 2018 -- May 2020",
+        "description": [
+          "Developed a Minecraft server plugin to entertain kids during free time for a previous job",
+          "Published plugin to websites gaining 2K+ downloads and an average 4.5/5-star review",
+          "Implemented continuous delivery using TravisCI to build the plugin upon new a release",
+          "Collaborated with Minecraft server administrators to suggest features and get feedback about the plugin"
+        ],
+        "name": "Simple Paintball",
+        "technologies": ["Spigot API", "Java", "Maven", "TravisCI", "Git"],
+        "url": ""
+      }
+    ],
+    "section_order": [
+        
+        "summary",
+      "experience",
+      "education",
+      "projects",
+      "skills",
+      "certifications",
+      "leadership"
+    ],
+    "skills": {
+      "categories": [
+        {
+          "items": [
+            "Java",
+            "Python",
+            "C/C++",
+            "SQL (Postgres)",
+            "JavaScript",
+            "HTML/CSS",
+            "R"
+          ],
+          "name": "Languages"
+        },
+        {
+          "items": [
+            "React",
+            "Node.js",
+            "Flask",
+            "JUnit",
+            "WordPress",
+            "Material-UI",
+            "FastAPI"
+          ],
+          "name": "Frameworks"
+        },
+        {
+          "items": [
+            "Git",
+            "Docker",
+            "TravisCI",
+            "Google Cloud Platform",
+            "VS Code",
+            "Visual Studio",
+            "PyCharm",
+            "IntelliJ",
+            "Eclipse"
+          ],
+          "name": "Developer Tools"
+        },
+        {
+          "items": ["pandas", "NumPy", "Matplotlib"],
+          "name": "Libraries"
+        }
+      ]
+    }
+  },
+  "template_id": 1,
+  "title": "Software Engineer Resume - Jake's Template"
+}

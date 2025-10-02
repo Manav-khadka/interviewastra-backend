@@ -1,0 +1,200 @@
+%-------------------------
+% Variable-Based Resume Template
+% All content fields are marked with {{VARIABLE_NAME}}
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%
+%-------------------------------------------
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Jake Ryan} \\ \vspace{1pt}
+    123 Main Street, Anytown, CA 12345
+    \small \raisebox{-0.1\height}\faPhone\ 123-456-7890 ~
+    \href{mailto:jake@su.edu}{\raisebox{-0.2\height}\faEnvelope\ \underline{jake@su.edu}} ~
+    \href{https://linkedin.com/in/jake}{\raisebox{-0.2\height}\faLinkedin\ \underline{jake}} ~
+    \href{https://github.com/jake}{\raisebox{-0.2\height}\faGithub\ \underline{jake}}
+    ~
+    \href{https://jakery.com}{\raisebox{-0.2\height}\faGlobe\ \underline{jakery.com}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Southwestern University}{Georgetown, TX}
+      {Bachelor of Arts in Computer Science, Minor in Business}{Aug. 2018 -- May 2021}
+    \resumeSubheading
+      {Blinn College}{Bryan, TX}
+      {Associate's in Liberal Arts}{Aug. 2014 -- May 2018}
+
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Undergraduate Research Assistant}{Texas A&M University}
+      {Research Assistant}{June 2020 -- Present}
+      \resumeItemListStart
+        \resumeItem{Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems}
+        \resumeItem{Developed a full-stack web application using Flask, React, PostgreSQL and Docker to analyze GitHub data}
+        \resumeItem{Explored ways to visualize GitHub collaboration in a classroom setting}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Information Technology Support Specialist}{Southwestern University}
+      {IT Support Specialist}{Sep. 2018 -- Present}
+      \resumeItemListStart
+        \resumeItem{Communicate with managers to set up campus computers used on campus}
+        \resumeItem{Assess and troubleshoot computer problems brought by students, faculty and staff}
+        \resumeItem{Maintain upkeep of computers, classroom equipment, and 200 printers across campus}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Artificial Intelligence Research Assistant}{Southwestern University}
+      {AI Research Assistant}{May 2019 -- July 2019}
+      \resumeItemListStart
+        \resumeItem{Explored methods to generate video game dungeons based on evolutionary algorithms}
+        \resumeItem{Discovered methods to grade dungeons based on key performance indicators}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-16pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/jake/gitlytics}{Gitlytics}} $|$ \emph{Python, Flask, React, PostgreSQL, Docker}}{June 2020 -- Present}
+          \resumeItemListStart
+            \resumeItem{Developed a full-stack web application using with Flask serving a REST API with React as the frontend}
+            \resumeItem{Implemented GitHub OAuth to get data from user's repositories}
+            \resumeItem{Visualized GitHub data to show collaboration}
+            \resumeItem{Used Celery and Redis for asynchronous tasks}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{Simple Paintball} $|$ \emph{Spigot API, Java, Maven, TravisCI, Git}}{May 2018 -- May 2020}
+          \resumeItemListStart
+            \resumeItem{Developed a Minecraft server plugin to entertain kids during free time for a previous job}
+            \resumeItem{Published plugin to websites gaining 2K+ downloads and an average 4.5/5-star review}
+            \resumeItem{Implemented continuous delivery using TravisCI to build the plugin upon new a release}
+            \resumeItem{Collaborated with Minecraft server administrators to suggest features and get feedback about the plugin}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Java, Python, C/C++, SQL (Postgres), JavaScript, HTML/CSS, R} \\
+     \textbf{Frameworks}{: React, Node.js, Flask, JUnit, WordPress, Material-UI, FastAPI} \\
+     \textbf{Developer Tools}{: Git, Docker, TravisCI, Google Cloud Platform, VS Code, Visual Studio, PyCharm, IntelliJ, Eclipse} \\
+     \textbf{Libraries}{: pandas, NumPy, Matplotlib} \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{\href{https://aws.amazon.com/certification/}{AWS Certified Solutions Architect}} - Amazon Web Services (June 2023) \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+
+%-----------LEADERSHIP/EXTRACURRICULAR-----------
+\section{Leadership / Extracurricular}
+    \resumeSubHeadingListStart
+      \resumeSubheading
+        {Computer Science Club}{}
+        {President}{Aug 2020 -- Present}
+        \resumeItemListStart
+          \resumeItem{Organized weekly tech talks with industry professionals}
+          \resumeItem{Led team of 15 students in hackathon competitions}
+        \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+\end{document}
