@@ -1,0 +1,168 @@
+@startuml ERD
+
+entity "applications" as applications {
+  * id : UUID
+  --
+  user_id : UUID <<FK>>
+  job_post_id : UUID <<FK>>
+  resume_id : UUID <<FK>>
+  status : application_status_enum
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "job_posts" as job_posts {
+  * id : UUID
+  --
+  company_id : UUID <<FK>>
+  title : VARCHAR(255)
+  description : TEXT
+  requirements : JSONB
+  location : VARCHAR(255)
+  salary_range : VARCHAR(100)
+  employment_type : employment_type_enum
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "companies" as companies {
+  * id : UUID
+  --
+  user_id : UUID <<FK>>
+  name : VARCHAR(255)
+  logo_url : VARCHAR(255)
+  description : TEXT
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "users" as users {
+  * id : UUID
+  --
+  username : VARCHAR(255)
+  name : VARCHAR(255)
+  email : VARCHAR(255)
+  password : VARCHAR(255)
+  auth_provider : auth_provider_enum
+  provider_id : VARCHAR(255)
+  role : user_role
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "resumes" as resumes {
+  * id : UUID
+  --
+  user_id : UUID <<FK>>
+  template_id : INTEGER <<FK>>
+  title : VARCHAR(255)
+  content_json : JSONB
+  ai_enhanced : BOOLEAN
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "templates" as templates {
+  * id : SERIAL
+  --
+  name : VARCHAR(150)
+  engine : template_engine_enum
+  content : TEXT
+  preview_url : VARCHAR(255)
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "company_documents" as company_documents {
+  * id : UUID
+  --
+  company_id : UUID <<FK>>
+  type : company_doc_type_enum
+  template_id : INTEGER <<FK>>
+  content_json : JSONB
+  generated_pdf_url : VARCHAR(255)
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "resume_analysis" as resume_analysis {
+  * id : UUID
+  --
+  resume_id : UUID <<FK>>
+  job_id : UUID <<FK>>
+  analysis_type : analysis_type
+  feedback_json : JSONB
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "job_descriptions" as job_descriptions {
+  * id : UUID
+  --
+  user_id : UUID <<FK>>
+  company_id : UUID <<FK>>
+  title : VARCHAR(255)
+  description : TEXT
+  metadata : JSONB
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "job_prep_kits" as job_prep_kits {
+  * id : UUID
+  --
+  user_id : UUID <<FK>>
+  resume_id : UUID <<FK>>
+  job_id : UUID <<FK>>
+  title : VARCHAR(255)
+  email_draft : TEXT
+  cover_letter : TEXT
+  hr_questions : JSONB
+  managerial_questions : JSONB
+  technical_questions : JSONB
+  dsa_questions : JSONB
+  puzzles : JSONB
+  meta : JSONB
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "shortlist_requests" as shortlist_requests {
+  * id : UUID
+  --
+  company_id : UUID <<FK>>
+  job_post_id : UUID <<FK>>
+  query : TEXT
+  result_json : JSONB
+  created_at : TIMESTAMP
+}
+
+' Relationships
+users ||--o{ applications : user_id
+job_posts ||--o{ applications : job_post_id
+resumes ||--o{ applications : resume_id
+
+companies ||--o{ job_posts : company_id
+
+users ||--o{ companies : user_id
+
+users ||--o{ resumes : user_id
+templates ||--o{ resumes : template_id
+
+companies ||--o{ company_documents : company_id
+templates ||--o{ company_documents : template_id
+
+resumes ||--o{ resume_analysis : resume_id
+job_descriptions ||--o{ resume_analysis : job_id
+
+users ||--o{ job_descriptions : user_id
+companies ||--o{ job_descriptions : company_id
+
+users ||--o{ job_prep_kits : user_id
+resumes ||--o{ job_prep_kits : resume_id
+job_descriptions ||--o{ job_prep_kits : job_id
+
+companies ||--o{ shortlist_requests : company_id
+job_posts ||--o{ shortlist_requests : job_post_id
+
+@enduml
